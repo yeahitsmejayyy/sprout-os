@@ -210,11 +210,16 @@ Nothing to keep running. Nothing to maintain. Nothing to break.
 
 ## 📄 What you get
 
+One folder, `sprout/`, containing two files:
+
 | File | What it does |
 |---|---|
 | `install.md` | Interviews you once, writes your `constitution.md`, steps aside. |
 | `index.md` | The instructions your agent follows. Same for everyone. |
 | `constitution.md` | **You.** Your preferences and context. You generate this — you don't download it. |
+
+Everything else — `memory/`, `snapshots/`, `sessions/`, `projects/` — grows inside that same
+folder as you use it. Plant a sprout, it grows.
 
 ---
 
@@ -311,10 +316,14 @@ you point Obsidian at your folder, it's a vault.
 ### Getting it connected
 
 1. Install [Obsidian](https://obsidian.md) — free.
-2. **Open folder as vault** → pick your Sprout folder.
+2. **Open folder as vault** → pick the `sprout` folder itself, not its parent.
 3. Click the graph icon in the left ribbon.
 
-Done. Your existing notes are already nodes.
+Done. Your existing notes are already nodes — and because the vault is scoped to `sprout/`, your
+graph is only your notes. No repo files, no README, no clutter.
+
+> 📦 Heads up if Sprout lives in a code repo: Obsidian writes its own `sprout/.obsidian/` config
+> folder when you open the vault. Harmless — `.gitignore` it if it bothers you.
 
 ### What to say to your agent
 
