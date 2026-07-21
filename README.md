@@ -38,7 +38,7 @@ Folders only appear when something needs to go in them. Your space grows to fit 
 ```
 day one                    a few months in
 ─────────                  ───────────────
-my-space/                  my-space/
+sprout/                    sprout/
   index.md                   index.md
   install.md                 constitution.md
                              memory/
@@ -63,39 +63,32 @@ my-space/                  my-space/
 
 **⏱ Two minutes.** Works with any agent that can read and write files.
 
-### 1 · Clone it
+### 1 · Get the `sprout` folder
+
+That folder — two markdown files — is the whole thing. Grab it and drop it where you want it:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/sprout-os.git my-space
-cd my-space
+git clone --depth 1 https://github.com/YOUR-USERNAME/sprout-os.git tmp \
+  && mv tmp/sprout ~/sprout \
+  && rm -rf tmp
 ```
 
-### 2 · Make it yours
+Change `~/sprout` to wherever it belongs:
 
-Right now it's a copy of someone else's repo. Cut it loose:
-
-```bash
-rm -rf .git
-```
-
-Now it's just a folder.
-
-> 💡 Sprout has no opinion about version control. Want it in git later? `git init` it yourself.
-> Don't? Works exactly the same.
-
-### 3 · Decide where it lives
-
-| | Where | Good for |
+| | Put it | Good for |
 |---|---|---|
-| 🏠 **A space of its own** | `~/my-space`, `~/Documents/brain` | Your life OS. Notes, memory, thinking. |
-| 📦 **Inside a project** | drop the 2 files into an existing repo | One codebase's memory: decisions, context, what you tried. |
+| 🏠 **A space of its own** | `~/sprout` | Your life OS. Notes, memory, thinking. |
+| 📦 **Inside a project** | `your-repo/sprout` | One codebase's memory: decisions, context, what you tried. |
 
 Most people start with 🏠 and add 📦 later, when a project gets big enough to want its own memory.
+
+> 💡 Sprout has no opinion about version control. There's no `.git` to clean up — you took the
+> folder, not the repo. Want it in git later? `git init` it yourself. Don't? Works exactly the same.
 
 > 💡 **You're not choosing once.** Any folder with an `index.md` is its own Sprout space. Nest them
 > freely — *"read the index"* works at any depth, and the nearest one wins.
 
-### 4 · Open the folder with your agent
+### 2 · Open it with your agent
 
 | Your agent | How |
 |---|---|
@@ -104,11 +97,14 @@ Most people start with 🏠 and add 📦 later, when a project gets big enough t
 | **Cursor / Windsurf / Zed** | open the folder, start a chat |
 | **Anything else** | paste `install.md` into the chat |
 
-### 5 · Say this
+🏠 For a space of its own, `cd ~/sprout` first — then everything below has no paths in it.
+📦 Inside a project, stay at the repo root and prefix the paths with `sprout/`.
 
-> **read install.md**
+### 3 · Say this
 
-### 6 · Answer four short questions
+> **read install.md** &nbsp;·&nbsp; 📦 *in a repo:* **read sprout/install.md**
+
+### 4 · Answer four short questions
 
 Who you are · how you like to work · anything you won't compromise on · whether you use Obsidian.
 
@@ -116,7 +112,7 @@ A sentence each is plenty. The agent writes your `constitution.md`, then stops.
 
 **That's the install.**
 
-### 7 · Start using it
+### 5 · Start using it
 
 Every session begins with:
 
@@ -128,8 +124,9 @@ Then just talk: *"note this"* · *"remember this"* · *"clean up my notes."*
 
 ✅ No accounts. No config. No dependencies. Nothing running in the background.
 
-> 💡 **Already have a folder you want to use?** Skip steps 1–3. Copy `install.md` and `index.md`
-> into it and start at step 4.
+> 💡 **Already have a folder you want to use?** Copy the `sprout` folder into it and start at
+> step 2. Or, if you'd rather it *be* that folder, copy `index.md` and `install.md` in directly —
+> the space is wherever `index.md` lands.
 
 ---
 
@@ -138,35 +135,46 @@ Then just talk: *"note this"* · *"remember this"* · *"clean up my notes."*
 Every major agent already autoloads an instructions file at session start. Drop **one line** in
 it and Sprout boots itself.
 
-**The line:**
+**Which file:**
 
-```markdown
-This folder is a Sprout space. Read `index.md` before doing anything here.
-```
-
-**Where it goes:**
-
-| Agent | File in your Sprout folder |
+| Agent | Instructions file |
 |---|---|
 | **Claude Code** | `CLAUDE.md` |
 | **Codex CLI** | `AGENTS.md` |
 | **Hermes** | `AGENTS.md` (or `.hermes.md` — it checks `.hermes.md` → `AGENTS.md` → `CLAUDE.md`) |
 | **OpenClaw** | `AGENTS.md` in your workspace (default `~/.openclaw/workspace`) |
 
+**Where it goes, and what to write** — it depends on where you run your agent from:
+
+🏠 **You work inside the folder** (`cd ~/sprout`). The file goes *in* `sprout/`, right next to
+`index.md`. No paths, nothing outside the folder:
+
+```markdown
+This folder is a Sprout space. Read `index.md` before doing anything here.
+```
+
+📦 **You work at a repo root** and Sprout lives in `sprout/`. The file is your repo's existing one:
+
+```markdown
+This repo has a Sprout space at `sprout/`. Read `sprout/index.md` before working in it.
+```
+
 Create the file if it isn't there. **If it already exists, add the line — don't replace what's in
 it.**
 
-Or just ask: *"wire this up so I don't have to say 'read the index' every time."*
+Or just ask: *"wire this up so I don't have to say 'read the index' every time."* The install
+agent offers to do exactly this, and it already knows which of the two cases you're in.
 
 ### Making Sprout your default, everywhere
 
 Want your space reachable from *any* directory — including while you're working in a code repo?
-Put a pointer in the **global** instructions file instead, with an absolute path:
+Put a pointer in the **global** instructions file instead. If you took the default location, this
+is copy-paste:
 
 ```markdown
-My Sprout space is at ~/my-space.
+My Sprout space is at ~/sprout.
 When I say "note this," "remember this," or "read the index,"
-read ~/my-space/index.md and follow it.
+read ~/sprout/index.md and follow it.
 ```
 
 | Agent | Global file |
