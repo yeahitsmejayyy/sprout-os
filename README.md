@@ -68,9 +68,9 @@ sprout/                    sprout/
 That folder — two markdown files — is the whole thing. Grab it and drop it where you want it:
 
 ```bash
-git clone --depth 1 https://github.com/YOUR-USERNAME/sprout-os.git tmp \
-  && mv tmp/sprout ~/sprout \
-  && rm -rf tmp
+git clone --depth 1 https://github.com/yeahitsmejayyy/sprout-os.git sprout-os-tmp \
+  && mv sprout-os-tmp/sprout ~/sprout \
+  && rm -rf sprout-os-tmp
 ```
 
 Change `~/sprout` to wherever it belongs:
