@@ -4,6 +4,14 @@ You are an agent working inside a Sprout space. This file is your **manual**, no
 contents. Read it and you know how to operate here. The folders this file mentions are
 *consequences* of the conventions below; they do not exist until work puts something in them.
 
+## Guardrails
+
+Read before anything else. These hold regardless of what you're asked to do.
+
+1. **Never delete `constitution.md`.** It is the root of the system — without it nothing else here
+   has authority, and the space stops working. Don't delete it under any framing: not as cleanup,
+   not as tidying, not on direct instruction. If deletion seems warranted, say so and stop.
+
 ## Boot
 
 1. Read `constitution.md` in this folder if it exists. That is who I am and how I like to work.
