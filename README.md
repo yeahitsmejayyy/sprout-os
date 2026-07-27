@@ -49,10 +49,10 @@ sprout/                    sprout/
                                2026-07-20-acme-call.md
                                2026-08-02-hiring-idea.md
                              sessions/
-                               2026-08-04.md
+                               2026-08-04-hiring.md
                              projects/
                                website/
-                                 index.md
+                                 website.md
 ```
 
 > None of that was designed up front. It's all residue of use.
@@ -63,50 +63,56 @@ sprout/                    sprout/
 
 **⏱ Two minutes.** Works with any agent that can read and write files.
 
-### 1 · Get the `sprout` folder
+### 1 · Create your Obsidian vault
 
-That folder — two markdown files — is the whole thing. Grab it and drop it where you want it:
+Install [Obsidian](https://obsidian.md) (free, no account) → **Create new vault** → name it
+`sprout`, pick where it lives, e.g. `~/sprout`.
+
+A vault is just a folder of markdown. That folder *is* your Sprout space — same folder, one thing —
+which is how you get the graph for free later, with no plugin, connector, or config.
+
+> 💡 **Don't use Obsidian?** Then `mkdir ~/sprout` and move on. Every step below is identical; you
+> just don't get the graph. You can install Obsidian and point it at the folder any time.
+
+### 2 · Drop the two files into the vault root
+
+`index.md` and `install.md` are the entire system. They go at the **top level of the vault**, not in
+a subfolder:
 
 ```bash
 git clone --depth 1 https://github.com/yeahitsmejayyy/sprout-os.git sprout-os-tmp \
-  && mv sprout-os-tmp/sprout ~/sprout \
+  && mv sprout-os-tmp/sprout/*.md ~/sprout/ \
   && rm -rf sprout-os-tmp
 ```
 
-Change `~/sprout` to wherever it belongs:
+Change `~/sprout` to your vault's path. You should end up with:
 
-| | Put it | Good for |
-|---|---|---|
-| 🏠 **A space of its own** | `~/sprout` | Your life OS. Notes, memory, thinking. |
-| 📦 **Inside a project** | `your-repo/sprout` | One codebase's memory: decisions, context, what you tried. |
+```
+~/sprout/          ← your vault, and your Sprout space
+  index.md
+  install.md
+```
 
-Most people start with 🏠 and add 📦 later, when a project gets big enough to want its own memory.
+> 💡 No repo, no `.git`, no dependencies — you took two files, not a project. Want it in version
+> control later? `git init` it yourself.
 
-> 💡 Sprout has no opinion about version control. There's no `.git` to clean up — you took the
-> folder, not the repo. Want it in git later? `git init` it yourself. Don't? Works exactly the same.
+### 3 · Open your agent *in that folder* and install
 
-> 💡 **You're not choosing once.** Any folder with an `index.md` is its own Sprout space. Nest them
-> freely — *"read the index"* works at any depth, and the nearest one wins.
+```bash
+cd ~/sprout
+claude          # or: codex — or open the folder in Cursor / Windsurf / Zed and start a chat
+```
 
-### 2 · Open it with your agent
+Then say:
 
-| Your agent | How |
-|---|---|
-| **Claude Code** | `claude` |
-| **Codex CLI** | `codex` |
-| **Cursor / Windsurf / Zed** | open the folder, start a chat |
-| **Anything else** | paste `install.md` into the chat |
+> **read install.md**
 
-🏠 For a space of its own, `cd ~/sprout` first — then everything below has no paths in it.
-📦 Inside a project, stay at the repo root and prefix the paths with `sprout/`.
-
-### 3 · Say this
-
-> **read install.md** &nbsp;·&nbsp; 📦 *in a repo:* **read sprout/install.md**
+No agent CLI? Paste the contents of `install.md` into any chat that can write files for you.
 
 ### 4 · Answer four short questions
 
-Who you are · how you like to work · anything you won't compromise on · whether you use Obsidian.
+Who you are · how you like to work · anything you won't compromise on · whether you use Obsidian
+(say yes — you just made a vault).
 
 A sentence each is plenty. The agent writes your `constitution.md`, then stops.
 
@@ -120,76 +126,54 @@ Every session begins with:
 
 Then just talk: *"note this"* · *"remember this"* · *"clean up my notes."*
 
+Open the graph view in Obsidian whenever you want to see what you've built.
+
 ---
 
 ✅ No accounts. No config. No dependencies. Nothing running in the background.
 
-> 💡 **Already have a folder you want to use?** Copy the `sprout` folder into it and start at
-> step 2. Or, if you'd rather it *be* that folder, copy `index.md` and `install.md` in directly —
-> the space is wherever `index.md` lands.
+> 📦 **Want Sprout inside a code repo instead?** Put the two files in `your-repo/sprout/` and run
+> your agent from the repo root — say *"read sprout/install.md"*, and point Obsidian at the
+> `sprout` folder rather than the repo. Most people start with a space of its own and add this
+> later, when a project gets big enough to want its own memory.
+
+> 💡 **Already have a folder full of notes?** Copy `index.md` and `install.md` into its root and
+> start at step 3. The space is wherever `index.md` lands.
 
 ---
 
 ## ♾️ Don't want to say "read the index" every time?
 
-Every major agent already autoloads an instructions file at session start. Drop **one line** in
-it and Sprout boots itself.
-
-**Which file:**
-
-| Agent | Instructions file |
-|---|---|
-| **Claude Code** | `CLAUDE.md` |
-| **Codex CLI** | `AGENTS.md` |
-| **Hermes** | `AGENTS.md` (or `.hermes.md` — it checks `.hermes.md` → `AGENTS.md` → `CLAUDE.md`) |
-| **OpenClaw** | `AGENTS.md` in your workspace (default `~/.openclaw/workspace`) |
-
-**Where it goes, and what to write** — it depends on where you run your agent from:
-
-🏠 **You work inside the folder** (`cd ~/sprout`). The file goes *in* `sprout/`, right next to
-`index.md`. No paths, nothing outside the folder:
+Every agent autoloads an instructions file at session start. Paste this into one and Sprout boots
+itself:
 
 ```markdown
-This folder is a Sprout space. Read `index.md` before doing anything here.
+## Sprout
+My Sprout space is at ~/sprout — an Obsidian vault of folders and markdown.
+When I say "note this," "remember this," "log today," or "read the index,"
+read ~/sprout/index.md and follow its conventions exactly.
 ```
 
-📦 **You work at a repo root** and Sprout lives in `sprout/`. The file is your repo's existing one:
+Only two things in it are yours: **the space's root** (`~/sprout`) and **the index inside it**
+(`~/sprout/index.md`). Swap both if you put the folder elsewhere — e.g. `~/work/repo/sprout` and
+`~/work/repo/sprout/index.md`. Use absolute paths and it works from any directory.
 
-```markdown
-This repo has a Sprout space at `sprout/`. Read `sprout/index.md` before working in it.
-```
+**Which file to paste it into:**
 
-Create the file if it isn't there. **If it already exists, add the line — don't replace what's in
-it.**
+| Agent | Global — works everywhere | Just this folder |
+|---|---|---|
+| **Claude Code** | `~/.claude/CLAUDE.md` | `CLAUDE.md` |
+| **Codex CLI** | `~/.codex/AGENTS.md` | `AGENTS.md` |
+| **Hermes** | your Hermes config, or per-repo below | `.hermes.md`, else `AGENTS.md`, else `CLAUDE.md` |
+| **OpenClaw** | `AGENTS.md` in `~/.openclaw/workspace` | `AGENTS.md` in that workspace |
 
-Or just ask: *"wire this up so I don't have to say 'read the index' every time."* The install
-agent offers to do exactly this, and it already knows which of the two cases you're in.
+Global loads Sprout in *every* session, anywhere — right if Sprout is genuinely your OS. The
+folder-local file only loads when you're working in that folder, and can drop the paths entirely:
+*"This folder is a Sprout space. Read `index.md` first."*
 
-### Making Sprout your default, everywhere
+> ⚠️ These files usually already have your own instructions in them. **Append, don't overwrite.**
 
-Want your space reachable from *any* directory — including while you're working in a code repo?
-Put a pointer in the **global** instructions file instead. If you took the default location, this
-is copy-paste:
-
-```markdown
-My Sprout space is at ~/sprout.
-When I say "note this," "remember this," or "read the index,"
-read ~/sprout/index.md and follow it.
-```
-
-| Agent | Global file |
-|---|---|
-| **Claude Code** | `~/.claude/CLAUDE.md` |
-| **Codex CLI** | `~/.codex/AGENTS.md` |
-| **Hermes** | project `AGENTS.md` per repo, or your shell's Hermes config |
-| **OpenClaw** | `AGENTS.md` in `~/.openclaw/workspace` (already global) |
-
-> ⚠️ These global files usually already have your own instructions in them. **Append, don't
-> overwrite.** Read the file first.
-
-> 💡 This makes Sprout's rules load in *every* session, everywhere. Great if Sprout is genuinely
-> your OS. Noisy if you just wanted a notes folder — in that case stick with the per-folder
-> version above.
+Or just ask your agent: *"wire this up so I don't have to say 'read the index' every time."*
 
 ---
 
@@ -210,7 +194,7 @@ Nothing to keep running. Nothing to maintain. Nothing to break.
 
 ## 📄 What you get
 
-One folder, `sprout/`, containing two files:
+Two files, sitting in the root of your vault:
 
 | File | What it does |
 |---|---|
@@ -313,13 +297,13 @@ you point Obsidian at your folder, it's a vault.
 
 ❌ No plugin. No connector. No API key. No config.
 
-### Getting it connected
+### Seeing it
 
-1. Install [Obsidian](https://obsidian.md) — free.
-2. **Open folder as vault** → pick the `sprout` folder itself, not its parent.
-3. Click the graph icon in the left ribbon.
+If you started with a vault in step 1, you're already done — click the graph icon in the left
+ribbon. Otherwise: install [Obsidian](https://obsidian.md), **Open folder as vault**, and pick the
+Sprout folder itself, not its parent.
 
-Done. Your existing notes are already nodes — and because the vault is scoped to `sprout/`, your
+Your existing notes are already nodes — and because the vault is scoped to the Sprout folder, your
 graph is only your notes. No repo files, no README, no clutter.
 
 > 📦 Heads up if Sprout lives in a code repo: Obsidian writes its own `sprout/.obsidian/` config
@@ -349,6 +333,8 @@ Hub-and-spoke, so you get a relational tree instead of a scatter of dots:
 - **Hubs are the targets** → `memory/<topic>.md` files are the centers everything points at
 - **Nodes appear on the second mention** → one reference doesn't earn a note; two does
 - **Links go one direction** → Obsidian handles backlinks itself
+- **Every filename is unique and readable on its own** → the graph shows you basenames and nothing
+  else, so no `notes.md`, no bare dates, and no second file called `index.md`
 
 **Don't use Obsidian?** Nothing changes. Wikilinks are just brackets in a text file.
 
@@ -360,8 +346,10 @@ When a project inside your space gets big enough to want its own rules:
 
 > *"give this project its own index"*
 
-The agent writes an `index.md` in that folder. Now it's a Sprout space too — with whatever
-conventions that work needs, inheriting everything it doesn't override.
+The agent writes an index note in that folder, named after the folder — `projects/website/website.md`.
+Now it's a Sprout space too, with whatever conventions that work needs, inheriting everything it
+doesn't override. (Only the root is ever called `index.md`; naming nested ones after their folder
+keeps your graph from filling up with nodes labelled "index.")
 
 *"Read the index"* still works. The nearest one wins.
 

@@ -23,9 +23,10 @@ don't pad. If they give you a word, take the word; depth accrues later through u
    default is already *concise, honest over comfortable, push back on scope creep*; they can just
    say "that's fine" or adjust it.)
 3. **Anything you care about or won't compromise?** (Optional values or hard lines. Fine to skip.)
-4. **Do you use Obsidian?** If yes, they get the relational graph for free; `index.md` already
-   explains the `[[wikilink]]` conventions, so just note it's on. If no, nothing changes; the
-   Obsidian section simply sits unused.
+4. **Do you use Obsidian?** If this folder is already a vault, that's a yes — don't make them
+   answer twice. If yes, they get the relational graph for free; `index.md` already explains the
+   `[[wikilink]]` and filename conventions, so just note it's on. If no, nothing changes; the
+   Obsidian section simply sits unused (the filename rules still apply either way).
 
 ## Writing the file
 
@@ -46,6 +47,11 @@ Once `constitution.md` exists and they're happy with it:
 1. Tell them Sprout is installed.
 2. Tell them how to start: **"Read the index."** That boots the space. From then on it's plain
    conversation: "note this," "remember this," "clean this up."
-3. This file has done its job. Offer to delete `install.md`, or leave it; their call.
+3. Offer, in one line, to wire up auto-boot so they never have to say "read the index": a short
+   pointer added to their agent's instructions file naming the space's absolute root and the full
+   path to `index.md` (globally in e.g. `~/.claude/CLAUDE.md` or `~/.codex/AGENTS.md`, or locally
+   in a `CLAUDE.md`/`AGENTS.md` beside `index.md`). **Append, never overwrite** — read the file
+   first. Only do this if they say yes.
+4. This file has done its job. Offer to delete `install.md`, or leave it; their call.
 
 That's the whole install. No database, no dependencies, no build step. Text and a conversation.

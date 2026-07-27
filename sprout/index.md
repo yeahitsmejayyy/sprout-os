@@ -43,12 +43,13 @@ doesn't exist yet.
 |---|---|---|
 | "note this" / "snapshot" / "capture" | a dated point-in-time note | `snapshots/YYYY-MM-DD-slug.md` |
 | "remember this" | a durable fact, appended | `memory/<topic>.md` |
-| "wrap the session" / "log today" | a session summary | `sessions/YYYY-MM-DD.md` |
+| "wrap the session" / "log today" | a session summary | `sessions/YYYY-MM-DD-slug.md` |
 | project work | files for that project | `projects/<name>/` |
 
 Conventions:
-- **Naming:** date-prefixed where the note is time-bound (`2026-07-19-slug.md`), plain topic
-  names where it's durable (`memory/health.md`). Slugs are kebab-case, short.
+- **Naming:** date-prefixed where the note is time-bound (`2026-07-19-acme-call.md`), plain topic
+  names where it's durable (`memory/health.md`). Slugs are kebab-case, short, and always present —
+  a bare date is not a filename. See **Filenames** below; those rules are not optional.
 - **Snapshots** are immutable moments: one file per capture; don't overwrite.
 - **Memory** is durable and additive: append to the right topic file, or start a new topic file
   if none fits. Keep entries dated inside the file.
@@ -64,6 +65,26 @@ Maintenance is conversation, not mechanism.
   what's stale, tighten what's kept. Show me before deleting anything I might want.
 - Never run a background process or a scheduled job to do this. It happens when I ask.
 
+## Filenames
+
+The filename *is* the interface. Obsidian labels every graph node with the basename alone and
+resolves `[[links]]` by basename across the whole vault, so a name that only makes sense next to
+its folder path is a name nobody can read. Three rules, no exceptions:
+
+1. **Unique across the entire space.** The same basename twice means an ambiguous link and two
+   identical-looking nodes. Qualify with scope rather than reusing a generic word:
+   `website-launch.md`, never a second `launch.md`.
+2. **Legible with the path stripped off.** Read the name on its own — if it doesn't say what the
+   file is, rename it. Banned outright: `notes.md`, `overview.md`, `misc.md`, `readme.md`,
+   `untitled.md`, `new.md`, a bare date, a bare number, and **`index.md` anywhere but the root of
+   the space** (see *Fractal property*).
+3. **Short, lowercase, kebab-case, singular.** `health`, `acme`, `pj` — the thing you'd naturally
+   type inside `[[ ]]`. Hubs and entities get one or two words; time-bound leaves get date plus
+   slug (`2026-07-20-acme-call.md`), where the slug is what makes the node readable.
+
+When a file's name and its folder would repeat each other (`clients/acme/acme-contact.md`), keep
+the folder and shorten the file, not the reverse. Depth is free; ambiguity is not.
+
 ## Obsidian graph
 
 A Sprout space *is* an Obsidian vault the moment you open the folder in Obsidian, with no connector,
@@ -75,7 +96,7 @@ Your one job is to link notes so the graph is a **relational tree, not a scatter
 `[[wikilinks]]` and follow hub-and-spoke:
 
 - **Leaves link up.** Every snapshot and session links to the topics, projects, and people it
-  touches: `[[health]]`, `[[sprout]]`, `[[PJ]]`. A leaf that links to nothing is an orphan node,
+  touches: `[[health]]`, `[[sprout]]`, `[[pj]]`. A leaf that links to nothing is an orphan node,
   so avoid it.
 - **Hubs are the targets.** Durable `memory/<topic>.md` notes are Maps of Content: the things
   many leaves point at. They're what gives the graph its centers.
@@ -84,15 +105,23 @@ Your one job is to link notes so the graph is a **relational tree, not a scatter
   Never pre-create these; one reference doesn't earn a node.
 - **Link one direction only.** Obsidian backlinks are automatic, so leaf→hub is enough; the tree
   shape falls out. Don't hand-maintain reverse links.
-- Wikilinks resolve by basename across the vault (`[[health]]` finds `memory/health.md`), so keep
-  hub/entity filenames short and unique. Date-prefixed leaf files are fine: they link out, they
-  rarely get linked to.
+- Wikilinks resolve by basename across the vault (`[[health]]` finds `memory/health.md`), which is
+  exactly why **Filenames** above is a hard rule and not style advice: a duplicate or generic
+  basename breaks linking, not just readability.
 
 Optional polish, only if I ask: tags (`#topic`) for graph coloring/filtering. Don't add them by
 default.
 
 ## Fractal property
 
-Any folder can be its own Sprout space by holding an `index.md`. "Read the index" works at any
-depth. When a project grows enough to deserve its own conventions, give it an `index.md`; don't
-build anything special for this; it already works.
+Any folder can be its own Sprout space by holding an index note, and "read the index" works at any
+depth — the nearest one wins. Nothing special is built for this; it already works.
+
+**Only the root of a space is named `index.md`.** A nested space's index takes the name of its
+folder: `projects/website/website.md`, `clients/acme/acme.md`. That one file is both the local
+manual *and* the hub node for `[[website]]`, so the graph gains a real center instead of a dozen
+nodes all labelled "index" that nobody can tell apart.
+
+So: **"read the index" here** means `index.md` in this folder if it exists, otherwise
+`<folder-name>.md`, otherwise walk up until you find one. Only give a folder an index when the work
+there has earned its own conventions — an index that just restates this file is scaffolding.
