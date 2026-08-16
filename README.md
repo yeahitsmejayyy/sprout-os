@@ -2,13 +2,19 @@
 
 # 🌱 Sprout OS
 
+<div align="center">
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-FF6100?style=flat-square)](./LICENSE) [![Security policy](https://img.shields.io/badge/security-policy-FF6100?style=flat-square)](SECURITY.md) [![Dependencies: none](https://img.shields.io/badge/dependencies-none-FF6100?style=flat-square)](#-what-you-get) [![Built with Markdown](https://img.shields.io/badge/built%20with-markdown-FF6100?style=flat-square)](#-the-idea)
+
+</div>
+
 **A personal AI operating system made of nothing but folders and markdown.**
 
 No database. No app. No build step.
 
 Your agent reads the markdown and works with your files directly. That's the whole system.
 
-[**See it →**](#-what-it-looks-like) · [**Get started →**](#-get-started) · [**Auto-boot it →**](#️-dont-want-to-say-read-the-index-every-time) · [**Obsidian →**](#-nice-extra-your-notes-as-a-graph)
+[**See it →**](#-what-it-looks-like) · [**Get started →**](#-get-started) · [**Auto-boot it →**](#️-make-it-boot-itself) · [**Obsidian →**](#-nice-extra-your-notes-as-a-graph)
 
 ---
 
@@ -142,38 +148,44 @@ Open the graph view in Obsidian whenever you want to see what you've built.
 
 ---
 
-## ♾️ Don't want to say "read the index" every time?
+## ♾️ Make it boot itself
 
-Every agent autoloads an instructions file at session start. Paste this into one and Sprout boots
-itself:
+Every agent autoloads an instructions file when a session starts. Paste this into one, change the
+two paths, and Sprout is part of every boot:
 
 ```markdown
-## Sprout
-My Sprout space is at ~/sprout — an Obsidian vault of folders and markdown.
-When I say "note this," "remember this," "log today," or "read the index,"
-read ~/sprout/index.md and follow its conventions exactly.
+## Sprout — boot procedure
+
+My Sprout space lives at `~/sprout`. It is an Obsidian vault: folders and markdown, nothing else.
+
+At the start of every session, before you do anything else, read `~/sprout/index.md`.
+It defines how this space works — capture conventions, file naming, linking, guardrails.
+Follow it exactly for the rest of the session, and re-read it if you lose the thread.
+
+This is not optional and I should not have to ask for it.
 ```
 
-Only two things in it are yours: **the space's root** (`~/sprout`) and **the index inside it**
-(`~/sprout/index.md`). Swap both if you put the folder elsewhere — e.g. `~/work/repo/sprout` and
-`~/work/repo/sprout/index.md`. Use absolute paths and it works from any directory.
+Two things in it are yours: the **space root** (`~/sprout`) and the **full path to its index**
+(`~/sprout/index.md`). Change both together if your folder lives elsewhere — e.g.
+`~/work/repo/sprout` and `~/work/repo/sprout/index.md`. Keep them absolute so they resolve from any
+directory.
 
-**Which file to paste it into:**
+**Where to paste it:**
 
-| Agent | Global — works everywhere | Just this folder |
+| Agent | Global — every session, anywhere | Only when you're in the folder |
 |---|---|---|
 | **Claude Code** | `~/.claude/CLAUDE.md` | `CLAUDE.md` |
 | **Codex CLI** | `~/.codex/AGENTS.md` | `AGENTS.md` |
-| **Hermes** | your Hermes config, or per-repo below | `.hermes.md`, else `AGENTS.md`, else `CLAUDE.md` |
+| **Hermes** | your Hermes config, or per-repo → | `.hermes.md`, else `AGENTS.md`, else `CLAUDE.md` |
 | **OpenClaw** | `AGENTS.md` in `~/.openclaw/workspace` | `AGENTS.md` in that workspace |
 
-Global loads Sprout in *every* session, anywhere — right if Sprout is genuinely your OS. The
-folder-local file only loads when you're working in that folder, and can drop the paths entirely:
-*"This folder is a Sprout space. Read `index.md` first."*
+Global is right if Sprout is genuinely your OS. The folder-local file loads only inside the space,
+where `index.md` sits right there — so you can drop the paths and just say *"This folder is a
+Sprout space. Read `index.md` before doing anything."*
 
 > ⚠️ These files usually already have your own instructions in them. **Append, don't overwrite.**
 
-Or just ask your agent: *"wire this up so I don't have to say 'read the index' every time."*
+Or have your agent do it: *"add Sprout to your boot instructions so you always read the index."*
 
 ---
 
