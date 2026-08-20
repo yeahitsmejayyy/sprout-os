@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-FF6100?style=flat-square)](./LICENSE) [![Security policy](https://img.shields.io/badge/security-policy-FF6100?style=flat-square)](SECURITY.md) [![Dependencies: none](https://img.shields.io/badge/dependencies-none-FF6100?style=flat-square)](#-what-you-get) [![Built with Markdown](https://img.shields.io/badge/built%20with-markdown-FF6100?style=flat-square)](#-the-idea)
+[![Plant one](https://img.shields.io/badge/plant%20one-sprout--os--site.vercel.app-FF6100?style=flat-square)](https://sprout-os-site.vercel.app/) [![License: MIT](https://img.shields.io/badge/license-MIT-FF6100?style=flat-square)](./LICENSE) [![Security policy](https://img.shields.io/badge/security-policy-FF6100?style=flat-square)](SECURITY.md) [![Dependencies: none](https://img.shields.io/badge/dependencies-none-FF6100?style=flat-square)](#-what-you-get) [![Built with Markdown](https://img.shields.io/badge/built%20with-markdown-FF6100?style=flat-square)](#-the-idea)
 
 </div>
 
@@ -14,7 +14,7 @@ No database. No app. No build step.
 
 Your agent reads the markdown and works with your files directly. That's the whole system.
 
-[**See it →**](#-what-it-looks-like) · [**Get started →**](#-get-started) · [**Auto-boot it →**](#️-make-it-boot-itself) · [**Obsidian →**](#-nice-extra-your-notes-as-a-graph)
+[**Plant one →**](https://sprout-os-site.vercel.app/) · [**See it →**](#-what-it-looks-like) · [**Get started →**](#-get-started) · [**Auto-boot it →**](#️-make-it-boot-itself) · [**Obsidian →**](#-nice-extra-your-notes-as-a-graph)
 
 ---
 
@@ -68,6 +68,16 @@ sprout/                    sprout/
 ## 🚀 Get started
 
 **⏱ Two minutes.** Works with any agent that can read and write files.
+
+### Two ways in
+
+| Path | What you do |
+|---|---|
+| **[The site →](https://sprout-os-site.vercel.app/)** | No terminal. Pick who you are, answer a handful of questions, download a space with your `constitution.md` already written. |
+| **The two files** ↓ | Everything below. Same system — you just run the install interview yourself, in your own agent. |
+
+Either way you end up with the same thing: a folder of markdown your agent reads. The site only
+moves the install interview into a browser first.
 
 ### 1 · Create your Obsidian vault
 
